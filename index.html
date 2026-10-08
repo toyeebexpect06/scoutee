@@ -173,6 +173,18 @@
       border-radius: 4px;
       margin-bottom: 4px;
     }
+
+    .email-link.email-sent {
+      color: #f59e0b !important;
+      cursor: not-allowed;
+      text-decoration: none;
+      opacity: 0.9;
+    }
+
+    .email-link.email-sent:hover {
+      text-decoration: none;
+      background-color: rgba(245, 158, 11, 0.08);
+    }
       
     /* Optimized button styles */
     .gmail-btn {
@@ -552,11 +564,8 @@
         <div class="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm focus-within:ring-2 focus-within:ring-blue-500 transition-all bg-white dark:bg-gray-800">
           <i class="ri-search-line px-4 text-gray-400 dark:text-gray-500 text-xl"></i>
           <input type="text" id="emailSearch" placeholder="Search an email or filter by status" class="flex-1 px-3 py-3 bg-transparent focus:outline-none text-gray-700 dark:text-gray-300 focus-effect">
-          <div class="px-3 flex items-center space-x-2">
-            <span class="text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Filter:</span>
-            <button id="filterAll" class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">All</button>
-            <button id="filterSent" class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">Sent</button>
-            <button id="filterPending" class="text-xs px-1 py-1 rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">Pending</button>
+          <div class="px-3 flex items-center">
+            <span class="text-xs text-gray-500 dark:text-gray-400 hidden md:inline">Search</span>
           </div>
         </div>
 
@@ -855,11 +864,18 @@ Best regards,
         <!-- Generated Links Section -->
         <div class="gmail-card p-6">
           <div id="mailtoLinks" class="hidden flex flex-col h-full">
-            <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center justify-between mb-3 gap-3 flex-wrap">
               <h3 class="text-lg font-medium flex items-center gap-2 text-gray-800 dark:text-gray-100">
                 <i class="ri-links-line text-blue-500"></i>
                 Generated Emails
               </h3>
+              
+              <!-- Email Status Filters -->
+              <div class="flex items-center gap-1.5">
+                <button id="filterAll" type="button" class="email-filter-btn text-xs px-2.5 py-1 rounded-md font-medium bg-orange-500 text-white">All</button>
+                <button id="filterSent" type="button" class="email-filter-btn text-xs px-2.5 py-1 rounded-md font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">Sent</button>
+                <button id="filterPending" type="button" class="email-filter-btn text-xs px-2.5 py-1 rounded-md font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">Pending</button>
+              </div>
               
               <!-- Action Buttons Dropdown -->
               <div class="relative">
@@ -884,7 +900,7 @@ Best regards,
             </div>
 
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">
-              Click an email to open your default mail app. Orange emails = already clicked.
+              Click an email to open your email app. Sent emails turn orange and cannot be clicked again.
             </p>
 
             <!-- Generated Links Container with Virtual Scrolling -->
@@ -1328,15 +1344,15 @@ I hope this email finds you well..."></textarea>
     function setActiveFilter(filter) {
       currentFilter = filter;
       
-      // Update button styles efficiently
+      // Active filter is orange; inactive filters remain neutral.
       [elements.filterAll, elements.filterSent, elements.filterPending].forEach(btn => {
-        btn.classList.remove('bg-blue-100', 'text-blue-700', 'dark:bg-blue-900/30', 'dark:text-blue-300');
+        btn.classList.remove('bg-orange-500', 'text-white');
         btn.classList.add('bg-gray-100', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
       });
       
       const activeBtn = filter === 'all' ? elements.filterAll : filter === 'sent' ? elements.filterSent : elements.filterPending;
       activeBtn.classList.remove('bg-gray-100', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
-      activeBtn.classList.add('bg-blue-100', 'text-blue-700', 'dark:bg-blue-900/30', 'dark:text-blue-300');
+      activeBtn.classList.add('bg-orange-500', 'text-white');
       
       applyEmailFilter();
     }
@@ -2182,4 +2198,4 @@ I hope this email finds you well..."></textarea>
 
 
 
-</body><!-- Mirrored from www.scoutier.com.ng/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 22 Jul 2025 10:55:45 GMT --></html>
+</body><!-- Mirrored from www.scoutier.com.ng/ by smartifypro /3.x [XR&CO'2014], Tue, 22 Jul 2025 10:55:45 GMT --></html>
